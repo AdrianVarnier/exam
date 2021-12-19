@@ -1,7 +1,5 @@
 #include "get_next_line.h"
 
-#include <stdio.h>
-
 static int	is_newline(char *s)
 {
 	int	i;
@@ -116,7 +114,6 @@ char	*get_next_line(int fd)
 		else
 		{
 			line = ft_strdup(buffer, '\0');
-//			ft_bzero(buffer, BUFFER_SIZE + 1);
 			buffer[0] = '\0';
 		}
 	}
@@ -138,7 +135,6 @@ char	*get_next_line(int fd)
 			line = ft_strjoin(line, buffer, '\0');
 			if (tmp != NULL)
 				free(tmp);
-//			ft_bzero(buffer, BUFFER_SIZE + 1);
 			buffer[0] = '\0';
 		}
 	}
