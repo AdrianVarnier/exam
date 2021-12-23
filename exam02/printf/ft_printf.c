@@ -1,5 +1,7 @@
 #include <stdarg.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void	ft_putchar(char c)
 {
@@ -83,6 +85,7 @@ int	ft_intlenu16(unsigned long x)
 	int	i;
 
 	i = 0;
+
 	while (x >= 16)
 	{
 		x = x / 16;
@@ -149,6 +152,12 @@ int ft_printf(const char *s, ...)
 			else if (s[i + 1] == 's')
 			{
 				tmp_str = va_arg(ap, char *);
+				if (tmp_str == NULL)
+				{
+					ft_putstr("(null)");
+					ret = ret + 6;
+					break ;
+				}
 				ft_putstr(tmp_str);
 				i = i + 2;
 				ret = ret + ft_strlen(tmp_str);
@@ -180,8 +189,7 @@ int ft_printf(const char *s, ...)
 				ret = ret + 2;
 				tmp_uint = va_arg(ap, unsigned long);
 				ft_putnbru16(tmp_uint, "0123456789abcdef");
-				ret = ret + ft_intlenu16(tmp_int);
-				printf("|%i|\n", ret);
+				ret = ret + ft_intlenu16(tmp_uint);
 				i = i + 2;
 			}
 			else
@@ -196,4 +204,17 @@ int ft_printf(const char *s, ...)
 	}
 	va_end(ap);
 	return (ret);
+}
+
+int main()
+{
+	int i;
+	char *p;
+//	p = malloc(sizeof(char) * 10);
+	p = NULL;
+	i = ft_printf("%s", p);
+	printf("%i\n", i);
+	i = printf("%s", p);
+	printf("%i\n", i);
+	return (0);
 }
