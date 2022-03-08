@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include <map>
+#include "ASpell.hpp"
 
 class	Warlock
 {
@@ -11,8 +13,9 @@ class	Warlock
 		Warlock(Warlock const &other);
 		Warlock	&operator=(Warlock const &other);
 
-		std::string	name;
-		std::string	title;
+		std::string			name;
+		std::string			title;
+		std::map<ASpell *>	spells;
 
 	public:
 		Warlock(std::string name, std::string title);
@@ -22,6 +25,9 @@ class	Warlock
 		std::string	getTitle() const;
 		void		setTitle(std::string title);
 		void		introduce() const;
+		void		learnSpell(ASpell *spell);
+		void		forgetSpell(std::string spell);
+		void		launchSpell(std::string spell);
 };
 
 #endif
