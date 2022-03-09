@@ -15,7 +15,7 @@ class	Warlock
 
 		std::string			name;
 		std::string			title;
-		std::map<ASpell *>	spells;
+		std::map<std::string, ASpell *>	spells;
 
 	public:
 		Warlock(std::string name, std::string title);
@@ -27,7 +27,7 @@ class	Warlock
 		void		introduce() const;
 		void		learnSpell(ASpell *spell);
 		void		forgetSpell(std::string spell);
-		void		launchSpell(std::string spell);
+		void		launchSpell(std::string spell, ATarget const &target);
 };
 
 #endif

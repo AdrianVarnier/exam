@@ -8,7 +8,7 @@ Fwoosh::~Fwoosh()
 {
 }
 
-Fwoosh	*clone() const
+Fwoosh	*Fwoosh::clone() const
 {
 	return (new Fwoosh);
 }

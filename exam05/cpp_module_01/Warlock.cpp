@@ -7,6 +7,12 @@ Warlock::Warlock(std::string name, std::string title) : name(name), title(title)
 
 Warlock::~Warlock()
 {
+	std::map<std::string, ASpell *>::iterator	it = this->spells.begin();
+	std::map<std::string, ASpell *>::iterator	end = this->spells.end();
+
+	for( ; it != end; it++)
+		delete it->second;
+	this->spells.clear();
 	std::cout << this->name << ": My job here is done!" << std::endl;
 }
 
@@ -32,18 +38,21 @@ void	Warlock::introduce() const
 
 void	Warlock::learnSpell(ASpell *spell)
 {
-	if (spells.find(spell.getName()) != this->spells.end())
-		spells.insert(spell.getName(), spell);
+	if (spells.find(spell->getName()) == this->spells.end())
+		spells.insert(std::pair<std::string, ASpell *>(spell->getName(), spell));
 }
 
 void	Warlock::forgetSpell(std::string spell)
 {
-	if (spells.find(spell.getName()) != this->spells.end())
-		spells.erase(spell.getName(), spell);
+	if (spells.find(spell) != this->spells.end())
+	{
+		delete spells.find(spell)->second;
+		spells.erase(spell);
+	}
 }
 
-void	Warlock::launchSpell(std::string spell)
+void	Warlock::launchSpell(std::string spell, ATarget const &target)
 {
-	if (spells.find(spell.getName()) != this->spells.end())
-		*(spells.find(spell)).launch();
+	if (spells.find(spell) != this->spells.end())
+		spells.find(spell)->second->launch(target);
 }

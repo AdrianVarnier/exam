@@ -33,7 +33,7 @@ std::string	ASpell::getEffects() const
 	return (this->effects);
 }
 
-void	ASpell::launch(ATarget const &target)
+void	ASpell::launch(ATarget const &target) const
 {
-	target.getHitBySpell(this);
+	target.getHitBySpell(*this);
 }
